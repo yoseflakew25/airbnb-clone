@@ -21,20 +21,6 @@ enum STEPS {
   INFO = 2,
 }
 
-export async function getServerSideProps({ params }) {
-  const userId = params.userId;
-  const user = await fetch(`/api/users/${userId}`);
-  const userData = await user.json();
-
-  return {
-    props: {
-      userData,
-    },
-  };
-}
-
-
-
 const SearchModal = () => {
   const router = useRouter();
   const searchModal = useSearchModal();
