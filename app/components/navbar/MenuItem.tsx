@@ -6,12 +6,12 @@ interface MenuItemProps {
 }
 
 const MenuItem: React.FC<MenuItemProps> = ({
-  // onClick,
+  onClick,
   label
 }) => {
   return ( 
-    <div 
-      // onClick={onClick} 
+    <div
+      onClick={onClick} 
       className="
         px-4 
         py-3 
