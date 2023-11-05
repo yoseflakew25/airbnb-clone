@@ -6,6 +6,7 @@ import { useCallback, useMemo, useState } from "react";
 import { Range } from "react-date-range";
 import { formatISO } from "date-fns";
 import { useRouter, useSearchParams } from "next/navigation";
+import Map from "../Map";
 
 import useSearchModal from "@/app/hooks/useSearchModal";
 
@@ -21,7 +22,21 @@ enum STEPS {
   INFO = 2,
 }
 
-const SearchModal = () => {
+
+export async function getServerSideProps({ query }) {
+  // Fetch data based on the query parameters
+  const userId = query.userId; // Adjust this based on your routing
+  // Fetch data based on the userId
+
+  return {
+    props: {
+      // Pass the fetched data to the component
+      userData: userData,
+    },
+  };
+}
+
+const SearchModal = ({ userData }) => {
   const router = useRouter();
   const searchModal = useSearchModal();
   const params = useSearchParams();
@@ -38,13 +53,13 @@ const SearchModal = () => {
     key: "selection",
   });
 
-  const Map = useMemo(
-    () =>
-      dynamic(() => import("../Map"), {
-        ssr: false,
-      }),
-    [location]
-  );
+  // const Map = useMemo(
+  //   () =>
+  //     dynamic(() => import("../Map"), {
+  //       ssr: false,
+  //     }),
+  //   [location]
+  // );
 
   const onBack = useCallback(() => {
     setStep((value) => value - 1);
